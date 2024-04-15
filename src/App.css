@@ -1,0 +1,47 @@
+/* App specific styles */
+.container {
+  width: 90%;
+  max-width: 960px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #f0f0f0; /* Choose your desired background color */
+  padding: 20px;
+}
+
+.list-group {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+.title-container, .search-container, .details-container {
+  background-color: inherit; /* Inherit the background color from the container */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px; /* Optional: Add some space between sections */
+}
+.list-item:hover {
+  background-color: #e9ecef;
+}
+
+.img-thumbnail {
+  max-width: 50%;  /* Resize the image to be 50% of its container */
+  height: auto;    /* Maintain aspect ratio */
+  border-radius: 4px;
+  display: block;  /* Ensures it respects max-width */
+  margin: 10px auto; /* Center the image horizontally */
+}
+
+
+h1, h2 {
+  text-align: center;
+}
