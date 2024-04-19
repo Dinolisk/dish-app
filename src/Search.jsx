@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
-import './Search.css';  // Ensure this import is correct
+import React from 'react';
+import './Search.css';
 
-function Search({ onMealSelect, updateSearchResults, searchResults }) {
-  const [query, setQuery] = useState('');
+function Search({ onMealSelect, updateSearchResults, searchResults, favorites, toggleFavorite }) {
+  const [query, setQuery] = React.useState('');
 
   const fetchMeals = async () => {
     if (query !== '') {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
       const data = await response.json();
-      updateSearchResults(data.meals);  // Update the search results in App component
+      updateSearchResults(data.meals || []); 
     }
   };
-  
-
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      fetchMeals(); // Trigger search when Enter key is pressed
+    }
+  };
   return (
     <div className="search-container">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Search for a meal"
-        className="search-box"  // Apply the styles to the search box
+        className="search-box"
       />
       <button onClick={fetchMeals} className="search-button">Search</button>
       {searchResults && (
@@ -28,6 +32,9 @@ function Search({ onMealSelect, updateSearchResults, searchResults }) {
           {searchResults.map((meal) => (
             <li key={meal.idMeal} onClick={() => onMealSelect(meal)}>
               {meal.strMeal}
+              {favorites.some((fav) => fav.idMeal === meal.idMeal) ? (
+                <span style={{ marginLeft: '0.5rem', color: 'red' }}>★</span>
+              ) : null}
             </li>
           ))}
         </ul>
